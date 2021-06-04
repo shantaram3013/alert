@@ -1,4 +1,4 @@
-function createElement(parent, tag, className, id, innerHTML, misc) {
+function _createElement(parent, tag, className, id, innerHTML, misc) {
     let elem = document.createElement(tag);
     if (className) elem.className = className;
     if (id) elem.id = id;
@@ -13,22 +13,21 @@ function createElement(parent, tag, className, id, innerHTML, misc) {
 }
 
 function initialiseAlert() {
-    let mask = createElement(document.body, 'div', 'v-flex-centered', 'mask');
-    let alert = createElement(mask, 'div', 'v-flex-centered', 'alert');
-    let alertH = createElement(alert, 'div', '', 'alert-header');
-    let alertB = createElement(alert, 'div', '', 'alert-body');
-    let alertF = createElement(alert, 'div', '', 'alert-footer');
-    let alertA = createElement(alertF, 'button', '', 'alert-action', 'Action');
-    let alertC = createElement(alertF, 'button', '', 'alert-close', 'Close');
+    let mask = _createElement(document.body, 'div', 'v-flex-centered', 'alert-mask');
+    let alert = _createElement(mask, 'div', 'v-flex-centered', 'alert');
+    let alertH = _createElement(alert, 'div', '', 'alert-header');
+    let alertB = _createElement(alert, 'div', '', 'alert-body');
+    let alertF = _createElement(alert, 'div', '', 'alert-footer');
+    let alertA = _createElement(alertF, 'button', '', 'alert-action', 'Action');
+    let alertC = _createElement(alertF, 'button', '', 'alert-close', 'Close');
     document.getElementById('alert-close').onclick = hideAlert();
 }
 
 function createAlert(title, body, mode, callback, callbackLabel) {
     // setting mask's display to flex makes every child visible
-    document.getElementById('mask').style.display = 'flex';
+    document.getElementById('alert-mask').style.display = 'flex';
     let close = document.getElementById('alert-close')
     // close button is only hidden in case of an error dialog, so we set this to block by default
-
     close.style.display = 'block';
     if (mode === 'error') {
         close.style.display = 'none'; // no point letting user continue on a broken site
@@ -44,7 +43,11 @@ function createAlert(title, body, mode, callback, callbackLabel) {
     let action = document.getElementById('alert-action');
     if (callback) { // if callback exists, enable the button for it and set the click action
         action.style.display = 'block';
-        action.innerHTML = callbackLabel;
+        if (Boolean(callbackLabel)) {
+            action.innerHTML = callbackLabel;
+        } else {
+            action.innerHTML = 'Action';
+        }
         action.onclick = function() {
             callback();
         }
@@ -57,7 +60,7 @@ function createAlert(title, body, mode, callback, callbackLabel) {
 }
 
 function hideAlert() {
-    document.getElementById('mask').style.display = 'none';
+    document.getElementById('alert-mask').style.display = 'none';
 }
 
 window.addEventListener('load', function() {
