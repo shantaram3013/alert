@@ -1,4 +1,4 @@
-function _createElement(parent, tag, className, id, innerHTML, misc) {
+function alert_CreateElement(parent, tag, className, id, innerHTML, misc) {
     let elem = document.createElement(tag);
     if (className) elem.className = className;
     if (id) elem.id = id;
@@ -13,21 +13,26 @@ function _createElement(parent, tag, className, id, innerHTML, misc) {
 }
 
 function initialiseAlert() {
-    let mask = _createElement(document.body, 'div', 'v-flex-centered', 'alert-mask');
-    let alert = _createElement(mask, 'div', 'v-flex-centered', 'alert');
-    let alertH = _createElement(alert, 'div', '', 'alert-header');
-    let alertB = _createElement(alert, 'div', '', 'alert-body');
-    let alertF = _createElement(alert, 'div', '', 'alert-footer');
-    let alertA = _createElement(alertF, 'button', '', 'alert-action', 'Action');
-    let alertC = _createElement(alertF, 'button', '', 'alert-close', 'Close');
+    let mask = alert_CreateElement(document.body, 'div', 'v-flex-centered', 'mask');
+    let alert = alert_CreateElement(mask, 'div', 'v-flex-centered', 'alert');
+    let alertH = alert_CreateElement(alert, 'div', '', 'alert-header');
+    let alertB = alert_CreateElement(alert, 'div', '', 'alert-body');
+    let alertF = alert_CreateElement(alert, 'div', '', 'alert-footer');
+    let alertA = alert_CreateElement(alertF, 'button', '', 'alert-action', 'Action');
+    let alertC = alert_CreateElement(alertF, 'button', '', 'alert-close', 'Close');
     document.getElementById('alert-close').onclick = hideAlert();
 }
 
 function createAlert(title, body, mode, callback, callbackLabel) {
+    const mask = document.getElementById('mask');
+    const alert = document.getElementById('alert');
     // setting mask's display to flex makes every child visible
-    document.getElementById('alert-mask').style.display = 'flex';
-    let close = document.getElementById('alert-close')
+    mask.style.display = 'flex';
+    mask.style.animation = '0.2s fade-out reverse';
+    alert.style.animation = '0.2s ease-in pop';
+    let close = document.getElementById('alert-close');
     // close button is only hidden in case of an error dialog, so we set this to block by default
+
     close.style.display = 'block';
     if (mode === 'error') {
         close.style.display = 'none'; // no point letting user continue on a broken site
@@ -43,11 +48,7 @@ function createAlert(title, body, mode, callback, callbackLabel) {
     let action = document.getElementById('alert-action');
     if (callback) { // if callback exists, enable the button for it and set the click action
         action.style.display = 'block';
-        if (Boolean(callbackLabel)) {
-            action.innerHTML = callbackLabel;
-        } else {
-            action.innerHTML = 'Action';
-        }
+        action.innerHTML = callbackLabel;
         action.onclick = function() {
             callback();
         }
@@ -60,7 +61,10 @@ function createAlert(title, body, mode, callback, callbackLabel) {
 }
 
 function hideAlert() {
-    document.getElementById('alert-mask').style.display = 'none';
+    document.getElementById('mask').style.animation = '0.19s fade-out forwards';
+    setTimeout(() => {
+        document.getElementById('mask').style.display = 'none';
+    }, 200);
 }
 
 window.addEventListener('load', function() {
