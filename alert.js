@@ -67,6 +67,6 @@ function hideAlert() {
     }, 200);
 }
 
-window.addEventListener('load', function() {
+window.addEventListener('DOMContentLoaded', function() {
     initialiseAlert();
 });
