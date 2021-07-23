@@ -109,7 +109,6 @@ function createPrompt(title, msg, callback, callbackLabel, onErr) {
 
     let close = document.getElementById('alert-close');
     close.onclick = function() {
-        hideAlert();
         if (onErr) onErr(ALERT_CANCELLED);
     }
 }

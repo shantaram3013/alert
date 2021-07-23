@@ -38,7 +38,7 @@ Here,
 * `callback` is a reference to a function. If this reference is valid, a second button will be displayed that will execute the function when clicked.
 * `callbackLabel` is a label for the callback button.
 
-This function creates a prompt dialog. The prompt takes a callback as an argument, to which the user-entered string is passed. Incase the user cancels the input or enters an empty string,  the onErr function is called.
+This function creates a prompt dialog. The prompt takes a callback as an argument, to which the user-entered string is passed. Incase the user cancels the input or enters an empty string,  the onErr function is called with either the parameter `ALERT_EMPTY_FIELD` or `ALERT_CANCELLED`.
 
 ```js
 function hideAlert()
