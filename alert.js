@@ -1,3 +1,6 @@
+const ALERT_EMPTY_FIELD = 0;
+const ALERT_CANCELLED = 1;
+
 function alert_CreateElement(parent, tag, className, id, innerHTML, misc) {
     let elem = document.createElement(tag);
     if (className) elem.className = className;
@@ -100,14 +103,14 @@ function createPrompt(title, msg, callback, callbackLabel, onErr) {
             callback(field.value);
             hideAlert();
         } else {
-            if (onErr) onErr();
+            if (onErr) onErr(ALERT_EMPTY_FIELD);
         }
     }
 
     let close = document.getElementById('alert-close');
     close.onclick = function() {
         hideAlert();
-        if (onErr) onErr();
+        if (onErr) onErr(ALERT_CANCELLED);
     }
 }
 
