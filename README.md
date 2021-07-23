@@ -17,7 +17,7 @@ And the JS source at the bottom of the `<body>` of your page:
 
 #### API
 
-The library exposes only two functions:
+The library exposes three functions:
 ```js
 function createAlert(title, body, mode, callback, callbackLabel)
 ```
@@ -27,6 +27,18 @@ Here,
 * `mode` is a string parameter. If `mode === 'error'`, the alert will be displayed with the close button hidden.
 * `callback` is a reference to a function. If this reference is valid, a second button will be displayed that will execute the function when clicked.
 * `callbackLabel` is a label for the callback button.
+This function creates a generic message box.
+
+```js
+function createPrompt(title, msg, callback, callbackLabel)
+```
+Here,
+* `title` is the title that will be displayed in the prompt header.
+* `msg` is a string that will be displayed in the prompt header next to a text field.
+* `callback` is a reference to a function. If this reference is valid, a second button will be displayed that will execute the function when clicked.
+* `callbackLabel` is a label for the callback button.
+
+This function creates a prompt dialog. The prompt takes a callback as an argument, to which the user-entered string is passed. Incase the user cancels the input or enters an empty string, the function throws an Error.
 
 ```js
 function hideAlert()
