@@ -94,7 +94,7 @@ function createPrompt(title, msg, callback, callbackLabel) {
 
     let action = document.getElementById('alert-action');
     action.style.display = 'block';
-    action.innerHTML = callbackLabel;
+    action.innerHTML = callbackLabel || 'Submit';
     action.onclick = function() {
         if (field.value) {
             callback(field.value);
