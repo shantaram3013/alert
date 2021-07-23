@@ -30,7 +30,7 @@ Here,
 This function creates a generic message box.
 
 ```js
-function createPrompt(title, msg, callback, callbackLabel)
+function createPrompt(title, msg, callback, callbackLabel, onErr)
 ```
 Here,
 * `title` is the title that will be displayed in the prompt header.
@@ -38,7 +38,7 @@ Here,
 * `callback` is a reference to a function. If this reference is valid, a second button will be displayed that will execute the function when clicked.
 * `callbackLabel` is a label for the callback button.
 
-This function creates a prompt dialog. The prompt takes a callback as an argument, to which the user-entered string is passed. Incase the user cancels the input or enters an empty string, the function throws an Error.
+This function creates a prompt dialog. The prompt takes a callback as an argument, to which the user-entered string is passed. Incase the user cancels the input or enters an empty string,  the onErr function is called.
 
 ```js
 function hideAlert()

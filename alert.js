@@ -67,7 +67,7 @@ function hideAlert() {
     }, 200);
 }
 
-function createPrompt(title, msg, callback, callbackLabel) {
+function createPrompt(title, msg, callback, callbackLabel, onErr) {
     const mask = document.getElementById('alert-mask');
     const alert = document.getElementById('alert');
     document.getElementById('alert-header').innerHTML = title; // set dialog title
@@ -100,15 +100,14 @@ function createPrompt(title, msg, callback, callbackLabel) {
             callback(field.value);
             hideAlert();
         } else {
-            hideAlert();
-            throw new Error('cancelled');
+            if (onErr) onErr();
         }
     }
 
     let close = document.getElementById('alert-close');
     close.onclick = function() {
         hideAlert();
-        throw new Error('cancelled');
+        if (onErr) onErr();
     }
 }
 
