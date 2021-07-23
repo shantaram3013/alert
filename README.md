@@ -17,7 +17,7 @@ And the JS source at the bottom of the `<body>` of your page:
 
 #### API
 
-The library exposes three functions:
+The library exposes four functions:
 ```js
 function createAlert(title, body, mode, callback, callbackLabel)
 ```
