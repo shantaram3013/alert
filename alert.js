@@ -152,6 +152,53 @@ function createConfirm(title, msg, yes, no, yesLabel, noLabel) {
     footer.append(yesBtn, noBtn);
 }
 
-window.addEventListener('DOMContentLoaded', function() {
+function createPromisedAlert(title, message, mode, label) {
+    return new Promise((resolve, reject) => {
+        try {
+            createAlert(title, message, mode, () => resolve(), label)
+        }
+        catch (e) {
+            reject(e);
+        }
+    })
+}
+
+function createPromisedPrompt(title, message, label) {
+    return new Promise((resolve, reject) => {
+        createPrompt(
+            title,
+            message,
+            (val) => resolve(val),
+            label,
+            (e) => reject(e)
+        );
+    })
+}
+
+function createPromisedConfirm(title, message, yesLabel, noLabel) {
+    return new Promise((resolve, reject) => {
+        createConfirm(
+            title,
+            message,
+            () => resolve(true),
+            () => resolve(false),
+            yesLabel,
+            noLabel
+        );
+    })
+}
+
+window.alertjs = {
+    message: createAlert,
+    prompt: createPrompt,
+    confirm: createConfirm,
+    promises: {
+        message: createPromisedAlert,
+        prompt: createPromisedPrompt,
+        confirm: createPromisedConfirm,
+    }
+}
+
+window.addEventListener('DOMContentLoaded', function () {
     initialiseAlert();
 });
