@@ -1,4 +1,13 @@
-# alert
+# (DEPRECATED) alert
+
+# THIS LIBRARY SUCKS! DON'T USE IT!
+
+If you're looking for an in-page alert implementation, look at
+[cf-alert](https://github.com/xyzshantaram/cf-alert) instead!
+
+**Old readme preserved for posterity:**
+
+---
 
 A vanilla JS/CSS in-page dialog implementation.
 
